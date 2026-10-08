@@ -1,0 +1,23 @@
+module LAB3(
+	
+	input wire A,
+	input	wire B,
+	input	wire En,
+	output wire s0,
+	output wire s1,
+	output wire s2,
+	output wire s3
+	
+);
+	
+	//negativando o sinal de En.
+	wire Not_En;
+	assign Not_En = ~En;
+	
+	//Lógica
+	assign s0 = Not_En & (~B) & (~A);
+	assign s1 = Not_En & (~B) & A;
+	assign s2 = Not_En & B & (~A);
+	assign s3 = Not_En & B & A;
+
+endmodule

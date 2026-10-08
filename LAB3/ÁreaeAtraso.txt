@@ -1,0 +1,3 @@
+Área Logic elements + PINOS: 4 + 7 = 11 
+
+Atraso máximo de propagação registrado: 8.15 ns
