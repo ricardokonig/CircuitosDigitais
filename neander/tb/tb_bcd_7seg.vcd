@@ -1,0 +1,254 @@
+$date
+	Mon Nov 23 00:12:24 2026
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1ns
+$end
+$scope module tb_bcd_7seg $end
+$var wire 7 ! seg [6:0] $end
+$var reg 4 " in [3:0] $end
+$var integer 32 # i [31:0] $end
+$var integer 32 $ passed_tests [31:0] $end
+$var integer 32 % total_tests [31:0] $end
+$scope module dut $end
+$var wire 4 & in [3:0] $end
+$var wire 1 ' m0 $end
+$var wire 1 ( m1 $end
+$var wire 1 ) m10 $end
+$var wire 1 * m11 $end
+$var wire 1 + m12 $end
+$var wire 1 , m13 $end
+$var wire 1 - m14 $end
+$var wire 1 . m15 $end
+$var wire 1 / m2 $end
+$var wire 1 0 m3 $end
+$var wire 1 1 m4 $end
+$var wire 1 2 m5 $end
+$var wire 1 3 m6 $end
+$var wire 1 4 m7 $end
+$var wire 1 5 m8 $end
+$var wire 1 6 m9 $end
+$var wire 1 7 n0 $end
+$var wire 1 8 n1 $end
+$var wire 1 9 n2 $end
+$var wire 1 : n3 $end
+$var wire 7 ; seg [6:0] $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+$comment Show the parameter values. $end
+$dumpall
+$end
+#0
+$dumpvars
+b1000000 ;
+1:
+19
+18
+17
+06
+05
+04
+03
+02
+01
+00
+0/
+0.
+0-
+0,
+0+
+0*
+0)
+0(
+1'
+b0 &
+b0 %
+b0 $
+b0 #
+b0 "
+b1000000 !
+$end
+#10
+b1111001 !
+b1111001 ;
+0'
+07
+1(
+b1 "
+b1 &
+b1 #
+b1 $
+b1 %
+#20
+b100100 !
+b100100 ;
+1/
+08
+17
+0(
+b10 "
+b10 &
+b10 #
+b10 $
+b10 %
+#30
+b110000 !
+b110000 ;
+0/
+07
+10
+b11 "
+b11 &
+b11 #
+b11 $
+b11 %
+#40
+b11001 !
+b11001 ;
+11
+09
+18
+17
+00
+b100 "
+b100 &
+b100 #
+b100 $
+b100 %
+#50
+b10010 !
+b10010 ;
+01
+07
+12
+b101 "
+b101 &
+b101 #
+b101 $
+b101 %
+#60
+b10 !
+b10 ;
+13
+08
+17
+02
+b110 "
+b110 &
+b110 #
+b110 $
+b110 %
+#70
+b1111000 !
+b1111000 ;
+03
+07
+14
+b111 "
+b111 &
+b111 #
+b111 $
+b111 %
+#80
+b0 !
+b0 ;
+15
+0:
+19
+18
+17
+04
+b1000 "
+b1000 &
+b1000 #
+b1000 $
+b1000 %
+#90
+b10000 !
+b10000 ;
+05
+07
+16
+b1001 "
+b1001 &
+b1001 #
+b1001 $
+b1001 %
+#100
+b1000 !
+b1000 ;
+1)
+08
+17
+06
+b1010 "
+b1010 &
+b1010 #
+b1010 $
+b1010 %
+#110
+b11 !
+b11 ;
+0)
+07
+1*
+b1011 "
+b1011 &
+b1011 #
+b1011 $
+b1011 %
+#120
+b1000110 !
+b1000110 ;
+1+
+09
+18
+17
+0*
+b1100 "
+b1100 &
+b1100 #
+b1100 $
+b1100 %
+#130
+b100001 !
+b100001 ;
+0+
+07
+1,
+b1101 "
+b1101 &
+b1101 #
+b1101 $
+b1101 %
+#140
+b110 !
+b110 ;
+1-
+08
+17
+0,
+b1110 "
+b1110 &
+b1110 #
+b1110 $
+b1110 %
+#150
+b1110 !
+b1110 ;
+0-
+07
+1.
+b1111 "
+b1111 &
+b1111 #
+b1111 $
+b1111 %
+#160
+b10000 #
+b10000 $
+b10000 %
