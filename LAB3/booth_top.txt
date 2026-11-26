@@ -1,0 +1,49 @@
+module booth_top (
+    input  wire       clk,          // Clock 50 MHz da placa DE0 (PIN_G21)
+    input  wire       rst_btn,      // Botão de Reset (ex: BUTTON[0] - ativo em 0)
+    input  wire       start_sw,     // Switch para start (SW[9])
+    input  wire [3:0] sw_B,         // Multiplicando M (SW[7:4])
+    input  wire [3:0] sw_A,         // Multiplicador Q (SW[3:0])
+    output wire [7:0] led_product,  // Resultado nos LEDs (LEDG[7:0])
+    output wire       led_done      // Indicação de término (LEDG[9])
+);
+
+    wire rst;
+    wire load, do_add, do_sub, do_shift, do_dec;
+    wire count_zero, q0, q_minus_1;
+
+    // Botões da DE0 são ativos em 0; a FSM espera reset ativo em 1
+    assign rst = ~rst_btn;
+
+    booth_control PC (
+        .clk        (clk),
+        .rst        (rst),
+        .start      (start_sw),
+        .count_zero (count_zero),
+        .q0         (q0),
+        .q_minus_1  (q_minus_1),
+        .load       (load),
+        .do_add     (do_add),
+        .do_sub     (do_sub),
+        .do_shift   (do_shift),
+        .do_dec     (do_dec),
+        .done       (led_done)
+    );
+
+    booth_datapath #(.N(4)) PO (
+        .clk          (clk),
+        .rst          (rst),
+        .load         (load),
+        .do_add       (do_add),
+        .do_sub       (do_sub),
+        .do_shift     (do_shift),
+        .do_dec       (do_dec),
+        .multiplicand (sw_B),
+        .multiplier   (sw_A),
+        .count_zero   (count_zero),
+        .q0           (q0),
+        .q_minus_1    (q_minus_1),
+        .product      (led_product)
+    );
+
+endmodule

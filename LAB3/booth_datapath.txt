@@ -1,0 +1,68 @@
+module booth_datapath #(parameter N = 4) (
+    input  wire             clk,
+    input  wire             rst,
+    input  wire             load,
+    input  wire             do_add,
+    input  wire             do_sub,
+    input  wire             do_shift,
+    input  wire             do_dec,
+    input  wire signed [N-1:0] multiplicand, // B[3:0] na Fig. 3
+    input  wire signed [N-1:0] multiplier,   // A[3:0] na Fig. 3
+    output wire             count_zero,
+    output wire             q0,
+    output wire             q_minus_1,
+    output wire [2*N-1:0]   product
+);
+
+    // M com 5 bits (extensão de sinal) para suportar -8 sem overflow na soma/subtração
+    reg signed [N:0]   M_reg;
+    // Registrador concatenado {A[4:0], Q[3:0], Q_minus_1} -> total de 10 bits internos
+    reg signed [N:0]   A_reg;
+    reg        [N-1:0] Q_reg;
+    reg                Q_m1_reg;
+    reg        [2:0]   count;
+
+    wire signed [N:0] adder_out;
+
+    // Somador / Subtrator combinacional
+    assign adder_out = do_add ? (A_reg + M_reg) :
+                       do_sub ? (A_reg - M_reg) : A_reg;
+
+    // Atualização síncrona dos registradores da PO
+    always @(posedge clk or posedge rst) begin
+        if (rst) begin
+            M_reg    <= {(N+1){1'b0}};
+            A_reg    <= {(N+1){1'b0}};
+            Q_reg    <= {N{1'b0}};
+            Q_m1_reg <= 1'b0;
+            count    <= 3'd0;
+        end
+        else if (load) begin
+            M_reg    <= {multiplicand[N-1], multiplicand}; // Extensão de sinal
+            A_reg    <= {(N+1){1'b0}};
+            Q_reg    <= multiplier;
+            Q_m1_reg <= 1'b0;
+            count    <= N[2:0]; // Inicia contador com N = 4
+        end
+        else begin
+            if (do_add || do_sub) begin
+                A_reg <= adder_out;
+            end
+            else if (do_shift) begin
+                // Deslocamento aritmético à direita de {A_reg, Q_reg, Q_m1_reg}
+                {A_reg, Q_reg, Q_m1_reg} <= {A_reg[N], A_reg, Q_reg};
+            end
+
+            if (do_dec && count > 0) begin
+                count <= count - 3'd1;
+            end
+        end
+    end
+
+    // Sinais de status para a PC e resultado final de 8 bits
+    assign count_zero = (count == 3'd0);
+    assign q0         = Q_reg[0];
+    assign q_minus_1  = Q_m1_reg;
+    assign product    = {A_reg[N-1:0], Q_reg};
+
+endmodule
